@@ -1,0 +1,123 @@
+<ion-buttons slot="start">
+  <ion-button class="closeButtonClass" (click)="_onClickDismiss()">
+    <ion-icon slot="icon-only" color="danger" name="close-circle-outline"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5" id="imageColID">
+        <img id="remoteImageID" src="{{selectedGarageRemote.image}}" height="150" />
+      </ion-col>
+      <ion-col size="7">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-no-padding">
+              <ion-label class="ion-text-wrap">
+                <ion-label color="danger" class="saveTag">Box </ion-label>
+                <ion-label color="dark" class="shellClass">{{selectedGarageRemote.shell}}</ion-label>
+                <ion-note color="dark" class="ion-text-nowrap otherdetailsClass"
+                  >{{selectedGarageRemote.boxnumber}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+            <ion-col size="12" class="ion-no-padding">
+              <ion-label class="ion-text-wrap">
+                <ion-label color="danger" class="saveTag">QTY </ion-label>
+                <ion-note color="dark" class="ion-text-nowrap otherdetailsClass"
+                  >{{selectedGarageRemote.qtyavailable}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+            <ion-col size="12" class="ion-no-padding">
+              <ion-label class="ion-text-wrap">
+                <ion-label color="danger" class="saveTag">Price </ion-label>
+                <ion-note color="dark" class="ion-text-nowrap otherdetailsClass"
+                  >${{selectedGarageRemote.sellingPrice}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+            <ion-col
+              size="12"
+              class="ion-no-padding"
+              *ngIf="selectedGarageRemote.compatibleBrand != null"
+            >
+              <ion-label class="ion-text-wrap">
+                <ion-label color="danger" class="saveTag">Brand</ion-label>
+                <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+                  >{{selectedGarageRemote.compatibleBrand}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+
+            <ion-col size="12" class="ion-no-padding">
+              <ion-label class="ion-text-wrap">
+                <ion-label color="danger" class="saveTag"
+                  >SKU
+                </ion-label>
+                <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+                  >{{selectedGarageRemote.tapsycode}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+            <ion-col
+              size="12"
+              class="ion-no-padding"
+              *ngIf="selectedGarageRemote.frequency != null"
+            >
+              <ion-label class="ion-text-wrap">
+                <ion-label color="danger" class="saveTag">Frequency</ion-label>
+                <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+                  >{{selectedGarageRemote.frequency}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <!-- compatiable with -->
+        <ion-list>
+          <ion-list-header class="saveTag"> Compatible With </ion-list-header>
+          <ion-item
+            id="compatiblecarItemID"
+            *ngFor="let compatibleModel of selectedGarageRemote.compatibleModels"
+          >
+            <ion-label id="carmodelcompatibleID" class="otherdetailsClass"
+              >{{compatibleModel}}</ion-label
+            >
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" id="compatiblecolID" *ngIf="selectedGarageRemote.notes != undefined">
+        <ion-list>
+          <ion-list-header class="saveTag"> Remote Notes </ion-list-header>
+          <ion-item *ngFor="let note of selectedGarageRemote.notes" lines="none">
+            <ion-label class="ion-text-wrap otherdetailsClass"
+              >{{note.username}} - {{note.notebodyText}}</ion-label
+            >
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      (click)="_onClickPrintInstrauctions()"
+      color="success"
+      expand="block"
+      >PRINT INSTRUCTIONS</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

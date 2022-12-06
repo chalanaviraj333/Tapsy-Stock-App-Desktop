@@ -1,0 +1,39 @@
+<ion-buttons slot="start">
+  <ion-button class="closeButtonClass" (click)="_onClickDismiss()">
+    <ion-icon slot="icon-only" name="chevron-down-circle"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+<ion-content>
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-label id="filterbyID">
+          -Blade-
+        </ion-label>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="onClickClear('blade')">Clear</ion-button>
+    </ion-item>
+
+    <ion-segment [value]="databaseTabThreeService.selectedData.selectedBlade" (ionChange)="onSelectBlade($event)" class="segmentButtonClass" scrollable>
+      <ion-segment-button class="ion-text-center extendedwidthClass" *ngFor="let bladeitem of databaseTabThreeService.bladeList" [value]="bladeitem">
+        <ion-label>{{bladeitem}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-label id="filterbyID">
+          -Buttons-
+        </ion-label>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="onClickClear('button')">Clear</ion-button>
+    </ion-item>
+
+    <ion-segment [value]="databaseTabThreeService.selectedData.selectedButton" (ionChange)="onSelectButtons($event)" class="segmentButtonClass" scrollable>
+      <ion-segment-button class="ion-text-center extendedwidthClass" *ngFor="let buttonItem of databaseTabThreeService.buttonList" [value]="buttonItem">
+        <ion-label>{{buttonItem}} Buttons</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+</ion-content>

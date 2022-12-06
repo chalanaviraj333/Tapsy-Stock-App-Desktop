@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primarylight">
+    <ion-buttons slot="start">
+      <ion-button (click)="_onClickDismiss()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-label id="toolebarbrandTitleID" slot="end">Low Stock</ion-label>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of databaseServiceTabTwo.lowStockItems"
+      (click)="onClickItemModal(selectedProduct = product)" [class]=[product.cssClass]>
+        <ion-grid>
+          <ion-row >
+            <ion-col class="ion-text-end">
+              <ion-badge class="ion-text-uppercase" fill="outline" color="warninglight">{{product.productytpe}}</ion-badge>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <img class="productImage" src="{{product.image}}" width="70" height="70">
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" class="ion-text-start">
+              <ion-label class="ion-text-nowrap">
+                <ion-label color="medium" class="saveTag">AVAl </ion-label>
+                <ion-note id="boxnumberID"
+                  color="dark"
+                  class="ion-text-nowrap"
+                  >{{product.qtyavailable}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+            <ion-col
+              size="6"
+              class="ion-text-end"
+            >
+              <ion-label class="ion-text-nowrap">
+                <ion-label color="medium" class="saveTag">BOX </ion-label>
+                <ion-note id="boxnumberID"
+                  color="danger"
+                  class="ion-text-nowrap"
+                  >{{product.boxnumber}}</ion-note
+                >
+              </ion-label>
+            </ion-col>
+          </ion-row>
+
+      <ion-row >
+        <ion-col size-xs="12" size-sm="4" size-md="3" size-lg="3" class="ion-text-center">
+
+            <!-- <ion-button class="addButtonClass" size="small" expand="block" color="primarylight" (click)="onClickAddButton(product.key)">VIEW</ion-button> -->
+
+      </ion-col >
+      </ion-row>
+        </ion-grid>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

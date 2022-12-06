@@ -1,0 +1,103 @@
+.logoheader {
+  width: 20%;
+  height: 20%;
+  margin-left:20px;
+}
+
+
+.header-icons {
+  width: 25px;
+}
+
+.headerTitleClass {
+    font-family: futura-pt,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    margin-left: 10px;
+    color: #188841;
+}
+
+.productImage {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.productTitle {
+  text-align: center;
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  height: 54px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-height: 16px;
+  max-height: 48px;
+  -webkit-box-orient: vertical;
+  margin-bottom: 5px;
+}
+
+.productMRP {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: line-through;
+  font-size: 20px;
+
+}
+
+.productOurSellingPrice {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 25px;
+  text-align: right;
+  background-color: #188841;
+}
+
+.priceTag {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-align: right;
+  padding-right: 3px;
+}
+
+
+.specialOfferTiles {
+  width: 100%;
+}
+
+.saveTag {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 8px;
+}
+
+.savepriceAmount {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+ion-item {
+  border-radius: 10px;
+}
+
+.saveTag {
+  font-family: futura-pt, sans-serif;
+font-weight: 700;
+font-style: normal;
+  font-size: 12px;
+}
+
+#boxnumberID {
+  font-size: 30px;
+font-family: futura-pt, sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+

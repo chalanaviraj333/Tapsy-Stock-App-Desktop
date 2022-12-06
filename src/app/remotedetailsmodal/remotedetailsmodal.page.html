@@ -1,0 +1,221 @@
+<ion-buttons slot="start">
+  <ion-button class="closeButtonClass" (click)="_onClickDismiss()">
+    <ion-icon slot="icon-only" color="danger" name="close-circle-outline"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+<ion-content>
+  <div class="imageDivClass">
+    <ion-slides [options]="sliderOpt" zoom>
+      <ion-slide>
+        <div class="swiper-zoom-container">
+          <img id="remoteImageID" src="{{selectedRemote.image}}" height="150" />
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+<ion-card style="border: solid 2px #616161;">
+  <div class="ion-text-end" style="margin: 10px 10px;">
+    <ion-badge color="warning" *ngIf="selectedRemote.remotetype == 'PROX'">Smart</ion-badge>
+    <ion-badge style="margin-left: 5px;" color="success" *ngIf="selectedRemote.suppliertype == 'Genuine' || selectedRemote.suppliertype == 'OEM'">{{selectedRemote.suppliertype}}</ion-badge>
+  </div>
+  <ion-card-header class="prodDetailsClass">Product Details</ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Box </ion-label>
+            <ion-label color="dark" class="shellClass">{{selectedRemote.shell}}</ion-label>
+            <ion-note color="dark" class="ion-text-nowrap otherdetailsClass"
+              >{{selectedRemote.boxnumber}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">QTY </ion-label>
+            <ion-note color="dark" class="ion-text-nowrap otherdetailsClass"
+              >{{selectedRemote.qtyavailable}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag"
+              >SKU
+            </ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.tapsycode}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col
+          size="12"
+          class="ion-no-padding"
+          *ngIf="selectedRemote.frequency != null"
+        >
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Frequency</ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.frequency}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col
+          size="12"
+          class="ion-no-padding"
+          *ngIf="selectedRemote.frequency != null"
+        >
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Type</ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.remotetype}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col
+          size="12"
+          class="ion-no-padding"
+          *ngIf="selectedRemote.inbuildblade != null"
+        >
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Blade</ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.inbuildblade}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+
+        <ion-col
+          size="12"
+          class="ion-no-padding"
+          *ngIf="selectedRemote.inbuildchip != null"
+        >
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Chip</ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.inbuildchip}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col
+          size="12"
+          class="ion-no-padding"
+          *ngIf="selectedRemote.buttons != null"
+        >
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Buttons</ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.buttons}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+        <ion-col
+          size="12"
+          class="ion-no-padding"
+          *ngIf="selectedRemote.battery != null"
+        >
+          <ion-label class="ion-text-wrap">
+            <ion-label color="danger" class="saveTag">Battery</ion-label>
+            <ion-note color="dark" class="ion-text-wrap otherdetailsClass"
+              >{{selectedRemote.battery}}</ion-note
+            >
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+<ion-card color="dark" *ngIf="selectedRemote.totalSale != undefined || selectedRemote.recentAddedQuantity != undefined || selectedRemote.moreStock != undefined">
+  <ion-card-header class="prodDetailsClass">Stock Details</ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" class="ion-no-padding" *ngIf="selectedRemote.recentAddedQuantity != undefined">
+                <ion-label class="stockdetailsClass"><i>{{selectedRemote.recentAddedQuantity}} items added to Stock on {{selectedRemote.recentmoreStockAddDate | date: 'shortDate' }}</i></ion-label>
+              </ion-col>
+
+              <ion-col size="12" class="ion-no-padding" *ngIf="selectedRemote.moreStock == true">
+                <ion-label class="stockdetailsClass"><i>More stock available in downstairs</i></ion-label>
+              </ion-col>
+  
+              <ion-col size="12" class="ion-no-padding" *ngIf="selectedRemote.totalSale != undefined">
+                <ion-label class="stockdetailsClass"><i><span style="color:tomato">{{selectedRemote.totalSale}} items</span> were sold so far.</i></ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+<div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <!-- compatiable with -->
+          <ion-label class="prodDetailsClass" style="margin-left: 20px;"> Compatible With </ion-label>
+          <ion-list>
+            <!-- <ion-list-header class="saveTag"> Compatible With </ion-list-header> -->
+            <ion-item
+              id="compatiblecarItemID"
+              *ngFor="let car of selectedRemote.compitablecars"
+            >
+              <ion-label id="carmodelcompatibleID" class="otherdetailsClass"
+                >{{car.model}} {{car.startyear}} - {{car.endyear}}</ion-label
+              >
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col size="12" id="compatiblecolID">
+          <!-- compatiable with -->
+          <ion-list>
+            <ion-list-header class="saveTag"> Remote Notes </ion-list-header>
+            <ion-item *ngFor="let note of selectedRemote.notes" lines="none">
+              <ion-label class="ion-text-wrap otherdetailsClass"
+                >{{note.username}} - {{note.notebodyText}}</ion-label
+              >
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <ion-row>
+          <ion-col size-xs="12">
+            <ion-item lines="none">
+              <ion-textarea
+                rows="5"
+                ngModel
+                name="remotenote"
+                placeholder="Enter any notes here..."
+                required
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-grid>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      (click)="f.ngSubmit.emit()"
+      color="success"
+      expand="block"
+      [disabled]="!f.valid"
+      >Save Note</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,58 @@
+<ion-buttons slot="start">
+  <ion-button class="closeButtonClass" (click)="_onClickDismiss()">
+    <ion-icon slot="icon-only" name="chevron-down-circle"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+<ion-content>
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-label id="filterbyID">
+          -Frequency-
+        </ion-label>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="onClickClear('frequency')">Clear</ion-button>
+    </ion-item>
+
+  
+  <ion-segment [value]="databaseTabTwoService.selectedData.selectedFrequncy" (ionChange)="onSelectFrequency($event)" class="segmentButtonClass" scrollable>
+      <ion-segment-button class="ion-text-center extendedwidthClass" *ngFor="let frequcnyitem of databaseTabTwoService.frequcnyList" [value]="frequcnyitem">
+      <ion-label>{{frequcnyitem}}</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+
+
+  <ion-item lines="none">
+    <ion-label class="ion-text-wrap">
+      <ion-label id="filterbyID">
+        -Chip-
+      </ion-label>
+    </ion-label>
+    <ion-button fill="outline" slot="end" (click)="onClickClear('chip')">Clear</ion-button>
+  </ion-item>
+
+    <ion-segment [value]="databaseTabTwoService.selectedData.selectedChip" (ionChange)="onSelectChip($event)" class="segmentButtonClass" scrollable>
+      <ion-segment-button class="ion-text-center extendedwidthClass" *ngFor="let chipitem of databaseTabTwoService.chipList" [value]="chipitem">
+        <ion-label>{{chipitem}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-label id="filterbyID">
+          -Blade-
+        </ion-label>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="onClickClear('blade')">Clear</ion-button>
+    </ion-item>
+
+    <ion-segment [value]="databaseTabTwoService.selectedData.selectedBlade" (ionChange)="onSelectBlade($event)" class="segmentButtonClass" scrollable>
+      <ion-segment-button class="ion-text-center extendedwidthClass" *ngFor="let bladeitem of databaseTabTwoService.bladeList" [value]="bladeitem">
+        <ion-label>{{bladeitem}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+</ion-content>

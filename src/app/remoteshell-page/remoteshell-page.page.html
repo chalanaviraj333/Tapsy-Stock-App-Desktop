@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="primarytext">All Remote Shells</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="doRefresh()">
+        <ion-icon slot="icon-only" name="refresh-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+<ion-toolbar color="primary">
+  <ion-searchbar #search debounce="500" (ionChange)="_ionChange($event)" placeholder="Brand, SKU, Box No" showCancelButton="never"></ion-searchbar>
+  <ion-button id="fliterbutton" color="light" size="small" slot="end" fill="outline" (click)="onClickFilter()">Filter</ion-button>
+</ion-toolbar>
+
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScrollStart)="logScrollStart()">
+
+  <div *ngIf="!data">  
+    <ion-list *ngFor="let in of counter(8) ;let i = index" >
+      <ion-item lines="none">
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 35%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+        <ion-thumbnail slot="end">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-card *ngFor="let remoteShell of databaseTabThreeSerive.filterRemoteShells" (click)="onClick(remoteShell)"
+    class="ion-activatable ripple-parent ion-no-margin">
+      <ion-card-content>
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-no-padding">
+          <ion-col size="7" class="ion-no-margin">
+            <ion-label class="ion-text-nowrap">
+              <ion-label color="medium" class="saveTag">BOX </ion-label>
+              <ion-label color="kdremotes" class="shellClass">{{remoteShell.shell}}</ion-label>
+              <ion-note id="boxnumberID"
+                color="danger"
+                class="ion-text-nowrap"
+                >{{remoteShell.boxnumber}}</ion-note
+              >
+            </ion-label>
+
+            <ion-label class="ion-text-nowrap availableClass">
+              <ion-label color="medium" class="saveTag">QTY </ion-label>
+              <ion-note id="boxnumberID"
+                color="dark"
+                class="ion-text-nowrap"
+                >{{remoteShell.qtyavailable}}</ion-note
+              >
+            </ion-label>
+            
+            <ion-card-subtitle color="dark" class="primarytext">{{remoteShell.inbuildblade}}</ion-card-subtitle>
+          </ion-col>
+          <ion-col size="5" class="ion-text-end ion-no-margin">
+            <img src="{{remoteShell.image}}" width="80" height="80" />
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="ScrollToTop()" *ngIf="hideButton">
+      <ion-icon name="arrow-up-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

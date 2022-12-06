@@ -1,0 +1,26 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="Brands" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="primarytext">{{selectedModel}}</ion-title>
+  </ion-toolbar>
+<ion-toolbar color="primary">
+  <ion-segment (ionChange)="onChangeType($event)" value="bysubmodels">
+    <ion-segment-button value="bysubmodels">
+      <ion-label>Models</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="byyear">
+      <ion-label>Year</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+<ion-progress-bar color="success" *ngIf="this.databaseService.isFetching" type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+
+  <app-car-sub-model *ngIf="turntomodels"></app-car-sub-model>
+  <app-car-year-model *ngIf="!turntomodels"></app-car-year-model>
+
+</ion-content>

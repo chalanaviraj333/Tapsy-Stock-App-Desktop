@@ -1,0 +1,35 @@
+<div id="errorContent">
+  <ion-chip *ngIf="(databaseService.searchCarSubModels).length == 0 && !databaseService.isFetching" color="danger">
+    <ion-icon name="sad-outline" color="danger"></ion-icon>
+    <ion-label>No Car Sub Model Found</ion-label>
+  </ion-chip>
+</div>
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="6" *ngFor="let submodel of this.databaseService.searchCarSubModels">
+      <ion-card (click)="onClickSubModel(submodel)" class="ion-activatable ripple-parent ion-no-margin">
+        <ion-card-header>
+          <div class="ion-text-center">
+            <img id="submodelImageID" src="{{submodel.icon}}" height="80" />
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-label class="ion-text-wrap">
+              <ion-text color="success">
+                <h2>{{submodel.model}} {{submodel.submodel}}</h2>
+              </ion-text>
+              <ion-text color="medium">
+                <p>{{submodel.startyear}} - {{submodel.endyear}}</p>
+              </ion-text>
+              <ion-badge *ngIf="submodel.typeofignition == 'Bladed'" color="dark">{{submodel.typeofignition}}</ion-badge>
+              <ion-badge *ngIf="submodel.typeofignition == 'Slot'" color="warning">{{submodel.typeofignition}}</ion-badge>
+              <ion-badge *ngIf="submodel.typeofignition == 'Prox'" color="danger">{{submodel.typeofignition}}</ion-badge>
+            </ion-label>
+        </ion-card-content>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>

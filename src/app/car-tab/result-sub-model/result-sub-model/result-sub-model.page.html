@@ -1,0 +1,274 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="Years"
+        [defaultHref]="['tabs/car-brand-page/car-model-page/car-sub-model-page/', selectedSubModel.brand, selectedSubModel.model, this.modelstartYear, this.modelendYear]"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="primarytext">Results</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="light" class="car-model-card-class">
+    <div class="img-wrapper">
+      <img src="{{selectedSubModel.icon}}" />
+    </div>
+    <div class="right-class">
+      <div class="ion-text-end">
+        <ion-badge color="danger">{{selectedSubModel.typeofignition}}</ion-badge>
+      <br>
+      <ion-label class="margin-class-car">{{selectedSubModel.profile}}</ion-label>
+      <br>
+      <ion-label class="margin-class-car">{{selectedSubModel.chipID}}</ion-label>
+      <br>
+      <ion-label class="margin-class-car">{{selectedSubModel.freq}}</ion-label>
+      </div>
+
+
+    </div>
+    <ion-card-content class="ion-text-start">
+      <h2>{{selectedSubModel.model}} {{selectedSubModel.submodel}}</h2>
+            <ion-text color="medium">
+              <div style="display: flex;" class="ion-justify-content-start">
+                <ion-icon class="calender-icon" name="calendar-outline" color="medium">
+                </ion-icon>
+                <p>{{selectedSubModel.startyear}} - {{selectedSubModel.endyear}}</p>
+              </div>
+            </ion-text>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="all-lost-key-card">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="5">
+                <ion-card class="all-lost-key-word-card">
+                 <h3 class="ion-text-center" style="font-weight: 700;">ALL <br> LOST KEYS</h3>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6" offset="1">
+                <h2 style="font-weight: 700; font-size: 40px; color: white; margin-bottom: 2px; margin-top: 3px;">390$</h2>
+                <ion-label color="light">*This price for local surburbs (under 30mins dirve)</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+
+      <!-- spare car key -->
+      <ion-col size="6">
+        <ion-card class="spare-lost-key-card">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="5">
+                <ion-card class="spare-lost-key-word-card">
+                 <h3 class="ion-text-center" style="font-weight: 700;">SPARE <br> CAR KEY</h3>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6" offset="1">
+                <h2 style="font-weight: 700; font-size: 40px; color: black; margin-bottom: 2px; margin-top: 3px;">290$</h2>
+                <ion-label color="light">*This price for shop visit only(Holland Park)</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  
+  <ion-item class="ion-no-padding">
+    <ion-grid>
+
+      <ion-row>
+        <ion-list *ngIf="databaseService.carNotesforCar.length != 0">
+          <ion-list-header id="spaecialnotesheaderID"
+            >Special Notes</ion-list-header
+          >
+          <ion-item *ngFor="let note of databaseService.carNotesforCar" lines="none">
+            <ion-label class="ion-text-wrap">
+              <ion-label class="carnotes ion-text-wrap"> {{note.carnotesDescription}} </ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-margin">
+      <ion-col size="12" class="ion-text-center">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <ion-text color="primary">
+              <ion-label color="dark" id="remotesTitleID">Remotes</ion-label>
+            </ion-text>
+            <ion-label class="ion-text-lowercase">
+              compatible for {{selectedSubModel.brand}}
+              {{selectedSubModel.model}} {{selectedSubModel.startyear}}
+            </ion-label>
+          </ion-label>
+          <!-- <ion-badge>{{compitableremotes.length}}</ion-badge> -->
+        </ion-item>
+        <div id="errorContent">
+          <!-- <ion-chip *ngIf="isFetchingRemotes" color="danger">
+            <ion-icon [name]="iconerrorremotes" color="danger"></ion-icon>
+            <ion-label>{{printerrorremotes}}</ion-label>
+          </ion-chip> -->
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-nowrap">
+      <ion-col
+        class="specialOfferTileClass"
+        size-xs="7"
+        size-sm="4"
+        size-md="3"
+        size-lg="3"
+        *ngFor="let remote of selectedSubModel.compatibleremotes"
+      >
+        <ion-card id="itemCardID" class="ion-activatable ripple-parent ion-no-margin" (click)="onClickItemModal(remote.tapsycode)">
+          <ion-card-content>
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col>
+                <ion-badge *ngIf="remote.remotetype == 'PROX'" color="danger">{{remote.remotetype}}</ion-badge>
+                <ion-badge *ngIf="remote.remotetype == 'BLADED'" color="warning">{{remote.remotetype}}</ion-badge>
+                <ion-badge *ngIf="remote.remotetype == 'SLOT'" color="warning">{{remote.remotetype}}</ion-badge>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12" class="ion-text-center">
+                  <img class="imageClass" src="{{remote.image}}" height="150" />
+                </ion-col>  
+              </ion-row>
+              <ion-row>
+                <ion-col size="6" class="ion-text-start">
+                  <ion-label class="ion-text-nowrap">
+                    <ion-label color="medium" class="saveTag">QTY </ion-label>
+                    <ion-note id="boxnumberID"
+                      color="dark"
+                      class="ion-text-nowrap"
+                      >{{remote.qtyavailable}}</ion-note
+                    >
+                  </ion-label>
+                </ion-col>
+                <ion-col
+                  size="6"
+                  class="ion-text-end"
+                >
+                  <ion-label class="ion-text-nowrap">
+                    <ion-label color="medium" class="saveTag">BOX </ion-label>
+                    <ion-label color="kdremotes" class="shellClass">{{remote.shell}}</ion-label>
+                    <ion-note id="boxnumberID"
+                      color="danger"
+                      class="ion-text-nowrap"
+                      >{{remote.boxnumber}}</ion-note
+                    >
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="remote.inbuildblade != null">
+                <ion-col
+                  size-xs="12"
+                  size-sm="4"
+                  size-md="3"
+                  size-lg="3"
+                  class="ion-text-start"
+                >
+                  <ion-label class="ion-text-wrap">
+                    <ion-label color="medium" class="saveTag">Blade </ion-label>
+                    <ion-note
+                      color="dark"
+                      class="ion-text-nowrap otherdetailsClass"
+                      >{{remote.inbuildblade}}</ion-note
+                    >
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+
+
+              <ion-row *ngIf="remote.frequency != null">
+                <ion-col
+                  size-xs="12"
+                  size-sm="4"
+                  size-md="3"
+                  size-lg="3"
+                  class="ion-text-start"
+                >
+                  <ion-label class="ion-text-wrap">
+                    <ion-label color="medium" class="saveTag">Freq </ion-label>
+                    <ion-note
+                      color="success"
+                      class="ion-text-wrap otherdetailsClass"
+                      >{{remote.frequency}}</ion-note
+                    >
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+
+
+              <ion-row *ngIf="remote.inbuildchip != null">
+                <ion-col
+                  size-xs="12"
+                  size-sm="4"
+                  size-md="3"
+                  size-lg="3"
+                  class="ion-text-start"
+                >
+                  <ion-label class="ion-text-wrap">
+                    <ion-label color="medium" class="saveTag">Chip </ion-label>
+                    <ion-note
+                      color="dark"
+                      class="ion-text-wrap otherdetailsClass"
+                      >{{remote.inbuildchip}}</ion-note
+                    >
+                  </ion-label>
+      
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-item class="ion-no-padding"></ion-item>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-margin">
+      <ion-col size="12" class="ion-text-center">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <ion-text color="primary">
+              <ion-label color="dark" id="remotesTitleID">Remote Shells</ion-label>
+            </ion-text>
+            <ion-label class="ion-text-lowercase">
+              compatible for {{selectedSubModel.brand}}
+              {{selectedSubModel.model}} {{selectedSubModel.startyear}}
+            </ion-label>
+          </ion-label>
+          <!-- <ion-badge>{{compitableremoteshells.length}}</ion-badge> -->
+        </ion-item>
+        <!-- <div id="errorContent">
+          <ion-chip *ngIf="isFetchingremoteshells" color="danger">
+            <ion-icon [name]="iconerrorremoteshells" color="danger"></ion-icon>
+            <ion-label>{{printerrorremoteshells}}</ion-label>
+          </ion-chip>
+        </div> -->
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

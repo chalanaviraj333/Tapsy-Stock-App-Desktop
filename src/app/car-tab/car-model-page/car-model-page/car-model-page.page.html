@@ -1,0 +1,46 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="Brands" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="primarytext">{{selectedBrand}}</ion-title>
+  </ion-toolbar>
+<ion-toolbar color="primary">
+  <ion-searchbar #search debounce="500" (ionChange)="_ionChange($event)" placeholder="Enter Models" showCancelButton="never" animated></ion-searchbar>
+</ion-toolbar>
+<ion-progress-bar color="success" *ngIf="this.databaseService.isFetching" type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScrollStart)="logScrollStart()">
+
+  <div id="errorContent">
+    <ion-chip *ngIf="(databaseService.searchCarModels).length == 0 && !databaseService.isFetching" color="danger">
+      <ion-icon name="sad-outline" color="danger"></ion-icon>
+      <ion-label>No Car Model Found</ion-label>
+    </ion-chip>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let model of this.databaseService.searchCarModels">
+        <ion-card *ngIf="model.show" (click)="onClick(x = model.model, startyear = model.startyear, endyear = model.endyear)" class="ion-activatable ripple-parent ion-no-margin">
+          <ion-card-header>
+            <ion-label color="dark" id="carmodelID">{{model.model}}</ion-label>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-note color="danger" id="yearsRangeID">{{model.startyear}}-{{model.endyear}}</ion-note>
+          </ion-card-content>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="ScrollToTop()" *ngIf="hideButton">
+      <ion-icon name="arrow-up-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
