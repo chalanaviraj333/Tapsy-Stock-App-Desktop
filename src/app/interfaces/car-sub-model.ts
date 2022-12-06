@@ -15,4 +15,11 @@ export interface CarSubModel {
     chipID: string;
     freq: string;
     profile: string;
+    allLostKeyPrice: number;
+    spareKeyPrice: number;
+    compatibleDevices: Array<string>;
+    allLostKeySpecialNotes: Array<string>;
+    spareKeySpecialNotes: Array<string>;
+    allLostKeyPriceUpdateDate: Date;
+    spareKeyPriceUpdateDate: Date;
 }

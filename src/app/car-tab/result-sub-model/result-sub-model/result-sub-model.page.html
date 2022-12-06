@@ -50,9 +50,54 @@
                  <h3 class="ion-text-center" style="font-weight: 700;">ALL <br> LOST KEYS</h3>
                 </ion-card>
               </ion-col>
-              <ion-col size="6" offset="1">
-                <h2 style="font-weight: 700; font-size: 40px; color: white; margin-bottom: 2px; margin-top: 3px;">390$</h2>
+              <ion-col *ngIf="selectedSubModel.allLostKeyPrice > 0" size="6" offset="1">
+                <h2 style="font-weight: 700; font-size: 40px; color: white; margin-bottom: 2px; margin-top: 3px;">{{selectedSubModel.allLostKeyPrice}}$</h2>
                 <ion-label color="light">*This price for local surburbs (under 30mins dirve)</ion-label>
+                <div>
+                  <div style="float: left">
+                    <ion-badge style="margin-top: 10px;" color="light">{{selectedSubModel.allLostKeyPriceUpdateDate | date: 'shortDate'}}</ion-badge>
+                  </div>
+                  <div style="float: right;">
+                    <ion-button color="light" fill="clear" (click)="editAllLostKeyData()">
+                      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col size="6" offset="1" *ngIf="selectedSubModel.allLostKeyPrice == null || selectedSubModel.allLostKeyPrice == 0">
+                <form #allLostKeyForm="ngForm" (ngSubmit)="onSubmitAllLostKeyPrice(allLostKeyForm)">
+                  <ion-item>
+                    <ion-label position="stacked">All Lost Key Price</ion-label>
+                    <ion-input type="number" name="allLostKeyPrice" ngModel placeholder="Enter here" required></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" ngModel="false" name="eprom"></ion-checkbox>
+                    <ion-label>EPROM only</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" ngModel="false" name="twokeysmust"></ion-checkbox>
+                    <ion-label>Two Keys Needed</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" ngModel="false" name="keydiycompatible"></ion-checkbox>
+                    <ion-label>KEYDIY Compatible</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" ngModel="false" name="genuineonly"></ion-checkbox>
+                    <ion-label>Genuine Keys only</ion-label>
+                  </ion-item>
+                  <div class="ion-text-end">
+                    <ion-button type="submit" color="success" [disabled]="!allLostKeyForm.valid">Save</ion-button>
+                  </div>
+                </form>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="3" *ngFor="let alert of this.selectedSubModel.allLostKeySpecialNotes">
+                  <ion-chip class="alert-badge-class">
+                    <ion-icon name="alert-circle-outline" style="color: #640f0f;"></ion-icon>
+                    <ion-label>{{alert}}</ion-label>
+                  </ion-chip>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -69,9 +114,50 @@
                  <h3 class="ion-text-center" style="font-weight: 700;">SPARE <br> CAR KEY</h3>
                 </ion-card>
               </ion-col>
-              <ion-col size="6" offset="1">
-                <h2 style="font-weight: 700; font-size: 40px; color: black; margin-bottom: 2px; margin-top: 3px;">290$</h2>
+              <ion-col *ngIf="selectedSubModel.spareKeyPrice > 0" size="6" offset="1">
+                <h2 style="font-weight: 700; font-size: 40px; color: black; margin-bottom: 2px; margin-top: 3px;">{{selectedSubModel.spareKeyPrice}}$</h2>
                 <ion-label color="light">*This price for shop visit only(Holland Park)</ion-label>
+                <div>
+                  <div style="float: left">
+                    <ion-badge style="margin-top: 10px;" color="light">{{selectedSubModel.spareKeyPriceUpdateDate | date: 'shortDate'}}</ion-badge>
+                  </div>
+                  <div style="float: right;">
+                    <ion-button color="light" fill="clear" (click)="editSpareKeyData()">
+                      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                
+              </ion-col>
+
+              <!-- getting data from user spare key price -->
+
+              <ion-col size="6" offset="1" *ngIf="selectedSubModel.spareKeyPrice == null || selectedSubModel.spareKeyPrice == 0">
+                <form #allSpareKeyForm="ngForm" (ngSubmit)="onSubmitSpareKeyPrice(allSpareKeyForm)">
+                  <ion-item>
+                    <ion-label position="stacked">Spare Key Price</ion-label>
+                    <ion-input type="number" name="spareKeyPrice" ngModel placeholder="Enter here" required></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" ngModel="false" name="keydiycompatible"></ion-checkbox>
+                    <ion-label>KEYDIY Compatible</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" ngModel="false" name="genuineonly"></ion-checkbox>
+                    <ion-label>Genuine Keys only</ion-label>
+                  </ion-item>
+                  <div class="ion-text-end">
+                    <ion-button type="submit" color="light" [disabled]="!allSpareKeyForm.valid">Save</ion-button>
+                  </div>
+                </form>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="3" *ngFor="let alert of this.selectedSubModel.spareKeySpecialNotes">
+                  <ion-chip class="alert-badge-class">
+                    <ion-icon name="alert-circle-outline" style="color: #640f0f;"></ion-icon>
+                    <ion-label>{{alert}}</ion-label>
+                  </ion-chip>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -79,10 +165,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
   
-  <ion-item class="ion-no-padding">
+  <!-- <ion-item class="ion-no-padding">
     <ion-grid>
 
       <ion-row>
@@ -98,10 +182,10 @@
         </ion-list>
       </ion-row>
     </ion-grid>
-  </ion-item>
+  </ion-item> -->
 
 
-  <ion-grid class="ion-no-padding">
+  <!-- <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-margin">
       <ion-col size="12" class="ion-text-center">
         <ion-item lines="none">
@@ -114,13 +198,10 @@
               {{selectedSubModel.model}} {{selectedSubModel.startyear}}
             </ion-label>
           </ion-label>
-          <!-- <ion-badge>{{compitableremotes.length}}</ion-badge> -->
+          
         </ion-item>
         <div id="errorContent">
-          <!-- <ion-chip *ngIf="isFetchingRemotes" color="danger">
-            <ion-icon [name]="iconerrorremotes" color="danger"></ion-icon>
-            <ion-label>{{printerrorremotes}}</ion-label>
-          </ion-chip> -->
+      
         </div>
       </ion-col>
     </ion-row>
@@ -259,16 +340,11 @@
               {{selectedSubModel.model}} {{selectedSubModel.startyear}}
             </ion-label>
           </ion-label>
-          <!-- <ion-badge>{{compitableremoteshells.length}}</ion-badge> -->
+          
         </ion-item>
-        <!-- <div id="errorContent">
-          <ion-chip *ngIf="isFetchingremoteshells" color="danger">
-            <ion-icon [name]="iconerrorremoteshells" color="danger"></ion-icon>
-            <ion-label>{{printerrorremoteshells}}</ion-label>
-          </ion-chip>
-        </div> -->
+        
       </ion-col>
     </ion-row>
 
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>

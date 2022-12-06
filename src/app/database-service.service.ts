@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ModalController, ToastController } from "@ionic/angular";
+import { LoadingController, ModalController, ToastController } from "@ionic/angular";
 import { CarNote } from "./car-note";
 import { NavparamService } from "./navparam.service";
 import { SelectedCar } from "./selected-car";
@@ -64,7 +64,8 @@ export class DatabaseServiceService {
     private http: HttpClient,
     public toastController: ToastController,
     private navParamService: NavparamService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public loadingController: LoadingController
   ) { }
 
 
@@ -218,7 +219,14 @@ export class DatabaseServiceService {
                 compatibleremoteshells: resData[key].compatibleremoteshells,
                 chipID: resData[key].chipID,
                 freq: resData[key].freq,
-                profile: resData[key].profile
+                profile: resData[key].profile,
+                allLostKeyPrice: Number(resData[key].allLostKeyPrice),
+                spareKeyPrice: Number(resData[key].spareKeyPrice),
+                compatibleDevices: resData[key].compatibleDevices,
+                allLostKeySpecialNotes: resData[key].allLostKeySpecialNotes,
+                spareKeySpecialNotes: resData[key].spareKeySpecialNotes,
+                allLostKeyPriceUpdateDate: resData[key].allLostKeyPriceUpdateDate,
+                spareKeyPriceUpdateDate: resData[key].spareKeyPriceUpdateDate
               });
               this.allCarSubModels.sort((a, b) => (a.startyear > b.startyear ? 1 : -1));
               this.isFetching = false;
@@ -233,6 +241,29 @@ export class DatabaseServiceService {
         }
         
       });
+  }
+
+  async updateCarSubmodelDetails(carSubModel: CarSubModel) {
+    const loading = await this.loadingController.create({
+      cssClass: 'uploadingproduct-css-class',
+      message: 'Uploading Changes',
+      backdropDismiss: false,
+    });
+    await loading.present();
+
+    this.http
+        .put(
+          `https://tapsy-stock-app-v3-database-default-rtdb.firebaseio.com/all-car-sub-models/${carSubModel.key}.json`,
+          { ...carSubModel, key: null }
+        )
+        .subscribe((resData) => {
+          setInterval(() => {
+            loading.dismiss();
+          }, 1000);
+
+          loading.message = 'Successfully Uploaded';
+          loading.spinner = null;
+        });
   }
 
 

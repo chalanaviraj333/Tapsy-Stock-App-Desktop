@@ -19,7 +19,7 @@ import { Printer } from '@awesome-cordova-plugins/printer/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, HttpClientModule, FormsModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, FormsModule, IonicModule.forRoot(), AppRoutingModule,],
   providers: [
     StatusBar,
     SplashScreen,

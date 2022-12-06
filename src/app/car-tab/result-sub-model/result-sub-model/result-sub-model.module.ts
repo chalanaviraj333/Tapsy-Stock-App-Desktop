@@ -13,7 +13,7 @@ import { ResultSubModelPage } from './result-sub-model.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ResultSubModelPageRoutingModule
+    ResultSubModelPageRoutingModule,
   ],
   declarations: [ResultSubModelPage]
 })
