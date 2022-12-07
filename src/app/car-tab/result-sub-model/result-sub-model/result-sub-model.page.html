@@ -10,39 +10,54 @@
 </ion-header>
 
 <ion-content>
-  <ion-card color="light" class="car-model-card-class">
-    <div class="img-wrapper">
-      <img src="{{selectedSubModel.icon}}" />
-    </div>
-    <div class="right-class">
-      <div class="ion-text-end">
-        <ion-badge color="danger">{{selectedSubModel.typeofignition}}</ion-badge>
-      <br>
-      <ion-label class="margin-class-car">{{selectedSubModel.profile}}</ion-label>
-      <br>
-      <ion-label class="margin-class-car">{{selectedSubModel.chipID}}</ion-label>
-      <br>
-      <ion-label class="margin-class-car">{{selectedSubModel.freq}}</ion-label>
-      </div>
 
+  <!-- top-card-slide start -->
+  <ion-slides pager="true">
+    <ion-slide >
+      <ion-card class="car-model-card-class">
+        <div class="img-wrapper">
+          <img src="{{selectedSubModel.icon}}" />
+        </div>
+        <div class="right-class">
+          <div class="ion-text-end">
+            <ion-badge color="danger">{{selectedSubModel.typeofignition}}</ion-badge>
+          <br>
+          <ion-label class="margin-class-car">{{selectedSubModel.profile}}</ion-label>
+          <br>
+          <ion-label class="margin-class-car">{{selectedSubModel.chipID}}</ion-label>
+          <br>
+          <ion-label class="margin-class-car">{{selectedSubModel.freq}}</ion-label>
+          </div>
+    
+    
+        </div>
+        <ion-card-content class="ion-text-start">
+          <h2 style="color: white; font-weight: 700;">{{selectedSubModel.model}} {{selectedSubModel.submodel}}</h2>
+                <ion-text color="medium">
+                  <div style="display: flex;" class="ion-justify-content-start">
+                    <ion-icon class="calender-icon" name="calendar-outline">
+                    </ion-icon>
+                    <p style="color: white; font-weight: 500;">{{selectedSubModel.startyear}} - {{selectedSubModel.endyear}}</p>
+                  </div>
+                </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
 
-    </div>
-    <ion-card-content class="ion-text-start">
-      <h2>{{selectedSubModel.model}} {{selectedSubModel.submodel}}</h2>
-            <ion-text color="medium">
-              <div style="display: flex;" class="ion-justify-content-start">
-                <ion-icon class="calender-icon" name="calendar-outline" color="medium">
-                </ion-icon>
-                <p>{{selectedSubModel.startyear}} - {{selectedSubModel.endyear}}</p>
-              </div>
-            </ion-text>
-    </ion-card-content>
-  </ion-card>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+  <!-- top-card-slide-end -->
   
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
-        <ion-card class="all-lost-key-card">
+      <ion-col size="12" size-md="6">
+        <ion-card class="all-lost-key-card ion-no-margin">
           <ion-grid>
             <ion-row>
               <ion-col size="5">
@@ -55,7 +70,7 @@
                 <ion-label color="light">*This price for local surburbs (under 30mins dirve)</ion-label>
                 <div>
                   <div style="float: left">
-                    <ion-badge style="margin-top: 10px;" color="light">{{selectedSubModel.allLostKeyPriceUpdateDate | date: 'shortDate'}}</ion-badge>
+                    <ion-badge style="margin-top: 10px;" color="dark">{{selectedSubModel.allLostKeyPriceUpdateDate | date: 'shortDate'}}</ion-badge>
                   </div>
                   <div style="float: right;">
                     <ion-button color="light" fill="clear" (click)="editAllLostKeyData()">
@@ -105,8 +120,8 @@
       </ion-col>
 
       <!-- spare car key -->
-      <ion-col size="6">
-        <ion-card class="spare-lost-key-card">
+      <ion-col size="12" size-md="6">
+        <ion-card class="spare-lost-key-card ion-no-margin">
           <ion-grid>
             <ion-row>
               <ion-col size="5">
@@ -119,7 +134,7 @@
                 <ion-label color="light">*This price for shop visit only(Holland Park)</ion-label>
                 <div>
                   <div style="float: left">
-                    <ion-badge style="margin-top: 10px;" color="light">{{selectedSubModel.spareKeyPriceUpdateDate | date: 'shortDate'}}</ion-badge>
+                    <ion-badge style="margin-top: 10px;" color="dark">{{selectedSubModel.spareKeyPriceUpdateDate | date: 'shortDate'}}</ion-badge>
                   </div>
                   <div style="float: right;">
                     <ion-button color="light" fill="clear" (click)="editSpareKeyData()">
@@ -147,7 +162,7 @@
                     <ion-label>Genuine Keys only</ion-label>
                   </ion-item>
                   <div class="ion-text-end">
-                    <ion-button type="submit" color="light" [disabled]="!allSpareKeyForm.valid">Save</ion-button>
+                    <ion-button type="submit" color="dark" [disabled]="!allSpareKeyForm.valid">Save</ion-button>
                   </div>
                 </form>
               </ion-col>
@@ -347,4 +362,6 @@
     </ion-row>
 
   </ion-grid> -->
+
+
 </ion-content>
